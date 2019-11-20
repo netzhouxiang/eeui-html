@@ -1,5 +1,5 @@
 # eeui-html
-解析eeui html标签
+eeui 解析html标签组件
 
 当前支持 em u s strong p img标签；支持背景色字体颜色，对齐方向； 在组件内可自行扩展
 
@@ -7,7 +7,7 @@
 参考链接：https://blog.csdn.net/codingandroid/article/details/77451389
 
 # 使用方法：
-1.下载压缩包,解压到eeui/src目录  
+1.下载压缩包,解压后，复制src里文件夹到eeui/src目录  
 2.然后在项目引入后，调用即可，如下：  
 ```javascript
     import html from "../../components/html.vue";
@@ -15,6 +15,7 @@
 ```
 
 # 如果是使用VUE开发后台，建议使用配合vue-quill-editor编辑器使用，配置:
+
 ```javascript
     editorOption: {
       modules: {
@@ -41,3 +42,8 @@
 }
 ```
 
+# vue-quill-editor.vue  
+是通过element-ui vue-quill-editor 插件编辑文章的示例文件  
+使用vue-quill-editor，可以参考一下;
+
+# 效果
