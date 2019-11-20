@@ -1,21 +1,24 @@
 <template>
     <div>
       <div v-for="(child, index) in children" :key="index">
-        <div v-if="child.tag==='div'" :class="child.class">
+        <richtext v-if="child.tag==='div'" :class="child.class">
           <template v-for="(item,y) in child.texts">
-            <text v-if="item.tag==='text'" :key="y" :style="item.style">{{item.text}}</text>
+            <span v-if="item.tag==='text'" class="text" :key="y" :style="item.style">{{item.text}}</span>
             <image v-if="item.tag==='image'" :key="y" @load="onImageLoad" :src="item.src" resize="stretch" 
             class="product-image" :style="{opacity:0,width: '2000px', height: '2000px'}"></image>
-            <text v-if="item.tag==='br'" :key="y" class="br"></text>
+            <span v-if="item.tag==='br'" :key="y" class="br"></span>
           </template>
-        </div>
+        </richtext>
       </div>
     </div>
 </template>
 <style>
 .p{
-  flex-direction:row;
-  flex-wrap:wrap;
+  /* flex-direction: row;
+  flex-wrap:wrap; */
+}
+.text{
+  font-size: 28px;
 }
 .br {
   height: 20px;
@@ -36,20 +39,7 @@
   const animation = weex.requireModule('animation');
   var {html2json} = require('../html2json/html2json');
   /*
-    weex html解析 十年 200592114
-    当前支持 em u s strong p img标签；支持背景色字体颜色，对齐方向；
-    配合VUE vue-quill-editor编辑器使用
-    editorOption: {
-      modules: {
-        toolbar: [
-          ["bold", "italic", "underline", "strike"],
-          [{ color: [] }, { background: [] }],
-          [{ align: [] }],
-          ["image"],
-          ["clean"]
-        ]
-      }
-    },
+    weex html解析
   */
   export default {
     props: {
@@ -70,7 +60,6 @@
       children() {
         if(this.content){
           const json = html2json(this.content,this);
-          //this.$alert(JSON.stringify(json))
           return this.translateJSON(json)
         }
         return [];
@@ -110,7 +99,11 @@
               var css_arr = node.attr.style.split(";")
               css_arr.forEach(item=>{
                 var css = item.split(":")
-                styleL[css[0]] = css[1];
+                var name=css[0];
+                if(name=="background-color"){
+                    name="backgroundColor";
+                }
+                styleL[name] = css[1];
               });
             }
             if (node.tag && node.tag === "img") {
@@ -123,13 +116,13 @@
                 tag: "br"
               });
             } else if (node.tag && node.tag === "u") {
-              styleL['text-decoration'] = 'underline';
+              styleL['textDecoration'] = 'underline';
             } 
             else if (node.tag && node.tag === "em") {
-              styleL['font-style'] = 'italic';
+              styleL['fontStyle'] = 'italic';
             } 
             else if (node.tag && node.tag === "s") {
-              styleL['text-decoration'] = 'line-through';
+              styleL['textDecoration'] = 'line-through';
             }  
             else if (node.tag && node.tag === "strong") {
               styleL.fontWeight = 'bold';

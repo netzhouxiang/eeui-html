@@ -1,7 +1,7 @@
 # eeui-html
 eeui 解析html标签组件 
 
-1.支持 em u s strong p img标签；  
+1.支持 span em u s strong p img标签；  
 2.支持背景色字体颜色，对齐方向；  
 3.支持图片自适应；  
 4.支持在组件内可自行无下限扩展  
