@@ -9,12 +9,13 @@
 # 使用方法：
 1.下载压缩包,解压到eeui/src目录  
 2.然后在项目引入后，调用即可，如下：  
-```java
+```javascript
     import html from "../../components/html.vue";
     <html :content="v.content"></html>
 ```
 
 # 如果是使用VUE开发后台，建议使用配合vue-quill-editor编辑器使用，配置:
+```javascript
     editorOption: {
       modules: {
         toolbar: [
@@ -26,8 +27,9 @@
         ]
       }
     },
-
+```
 # html.vue 组件内样式，分别对应vue-quill-editor编辑器 （toolbar：align） 的对齐方向，可自行调整：
+```css
 .ql-align-center{
   justify-content: center;
 }
@@ -37,4 +39,5 @@
 .ql-align-justify{
   justify-content: space-between;
 }
+```
 
