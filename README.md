@@ -47,3 +47,7 @@ eeui 解析html标签组件
 使用vue-quill-editor，可以参考一下;
 
 # 效果
+
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/1.jpg)
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/2.jpg)
+
