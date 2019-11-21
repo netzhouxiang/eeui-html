@@ -9,12 +9,18 @@
           </template>
         </richtext>
       </div>
+      <text class="loading" v-if="!reload">正在载入</text>
     </div>
 </template>
 <style>
+/*防止网络过慢，图片加载缓慢，增加loading */
+.loading{
+  text-align: center;
+  color: #999;
+}
 /*行样式，需要什么自行添加*/
 .div{
-  /* margin-bottom: 50px; */
+  /* margin-bottom: 30px; */
 }
 /*文字大小*/
 .text{
@@ -58,8 +64,11 @@
     },
     data() {
         return {
+          //当前img 没有宽度和高度的数量
+          imgNum:0,
+          showImgNum:0,
           //是否显示，用于销毁组件
-          reload:true,
+          reload:false,
           //标签结构
           labellist: [],
         };
@@ -71,6 +80,7 @@
           const json = html2json(this.content);
           //循环处理结构和图片，因为异步获取，无法判定什么时候完成，则先加载结构
           this.translateJSON(json);
+          this.showImgNum = 0;
           //后处理图片，监听更新界面
           this.labellist.forEach((item,x)=>{
             item.texts.forEach((image,y)=>{
@@ -83,11 +93,15 @@
       },
       //如果监听到值改变，则销毁数据重新绑定
       labellist(){
-        this.reload = false;
-        //weex不支持$nexttick 先延时搞一搞
-        setTimeout(()=>{
+        //表示没有需要处理的图片，直接展示HTML
+        if(this.imgNum==0){
           this.reload = true;
-        },10)
+          return;
+        }
+        //表示有需要处理的图片，判定是否处理完毕
+        if(this.showImgNum>0 && this.showImgNum == this.imgNum){
+          this.reload = true;
+        }
       }
     },
     methods: {
@@ -95,7 +109,7 @@
       * 图片自适应
       */
       getImageLoad (image,x,y) {
-            if(image.width){
+            if(image.width && image.height){
               return;
             }
             eeui.getImageSize(image.src, result=>{
@@ -108,6 +122,7 @@
               }
               this.labellist[x].texts[y].width = _w +'px';
               this.labellist[x].texts[y].height= _h +'px';
+              this.showImgNum++;
               this.labellist = JSON.parse(JSON.stringify(this.labellist));
             });
         },
@@ -115,8 +130,7 @@
         * html解析，可自行扩展
         */
         translateJSON(node) {
-          this.labellist =  [];
-          var _self=this;
+          var _labellist =  [];
           const translate = (_texts, node, styleList) => {
             //继承上级样式
             var styleL = styleList;
@@ -136,6 +150,9 @@
             }
             //处理img标签
             if (node.tag && node.tag === "img") {
+              if(!node.attr.width || !node.attr.height){
+                this.imgNum++;
+              }
               _texts.push({
                 tag: "image",
                 width:(node.attr.width?node.attr.width+'px':0),
@@ -202,13 +219,14 @@
                 styleL[name] = css[1];
               });
             }
-            _self.labellist.push({
+            _labellist.push({
               tag: "div",
               style: styleL,
               class: _class,
               texts: _texts
             });
           });
+        this.labellist = _labellist;
       }
     }
   }
