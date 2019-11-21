@@ -77,6 +77,7 @@
       //获取数据进行解析绑定，获取原图片大小处理
       content(){
         if(this.content){
+          this.imgNum = 0;
           const json = html2json(this.content);
           //循环处理结构和图片，因为异步获取，无法判定什么时候完成，则先加载结构
           this.translateJSON(json);
