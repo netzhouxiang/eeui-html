@@ -31,14 +31,26 @@ eeui 解析html标签组件
   text-align: justify;
 }
 ```
+# 效果：  
+分别渲染页面：  
+1.https://appapi.bizhihui.info/api/article/BQX8xTIT35?html=1：  
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/3.jpg)
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/4.jpg)  
 
-# 效果
+2.https://m.kanzhun.com/news/412889.html  
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/5.jpg)
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/6.jpg)
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/7.jpg)  
+
+
+
+# vue-quill-editor效果
   
 后台：  
-![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/1.jpg)  
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/1.jpg)  
   
 eeui app：  
-![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/2.jpg)  
+![image](https://raw.githubusercontent.com/netzhouxiang/eeui-html/master/demo/2.jpg)  
 
 
 
