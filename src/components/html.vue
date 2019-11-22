@@ -4,22 +4,15 @@
       <richtext v-if="child.tag==='div'" :class="child.class" :style="child.style">
         <template v-for="(item,y) in child.texts">
           <span v-if="item.tag==='text'" class="text" :key="y" :style="item.style">{{item.text}}</span>
-          <image v-if="item.tag==='image'" :key="y" :src="item.src" resize="stretch" 
+          <image v-if="item.tag==='image'" :key="y" :src="item.src" resize="stretch"
             :style="{width: item.width, height: item.height}"></image>
           <image v-if="item.tag==='br'" src="data:image/png;" :key="y" class="br"></image>
         </template>
       </richtext>
     </div>
-    <text class="loading" v-if="!reload">正在载入</text>
   </div>
 </template>
 <style>
-  /*防止网络过慢，图片加载缓慢，增加loading */
-  .loading {
-    text-align: center;
-    color: #999;
-  }
-
   /*行样式，需要什么自行添加*/
   .div {
     /* margin-bottom: 30px; */
