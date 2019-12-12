@@ -74,6 +74,8 @@
       //获取数据进行解析绑定，获取原图片大小处理
       content() {
         if (this.content) {
+          this.reload = false;
+          this.labellist = [];
           this.imgNum = 0;
           const json = html2json(this.content);
           this.translateJSON(json);
