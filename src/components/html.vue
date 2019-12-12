@@ -118,9 +118,11 @@
               _h = result.height * bi;
               _w = this.imgWidth;
             }
-            this.labellist[x].texts[y].width = _w + 'px';
-            this.labellist[x].texts[y].height = _h + 'px';
-            this.labellist = JSON.parse(JSON.stringify(this.labellist));
+            if(this.labellist[x] && this.labellist[x].texts[y]){
+              this.labellist[x].texts[y].width = _w + 'px';
+              this.labellist[x].texts[y].height = _h + 'px';
+              this.labellist = JSON.parse(JSON.stringify(this.labellist));
+            }
           }
         });
       },
